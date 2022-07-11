@@ -7,11 +7,7 @@
 const Promise = require("bluebird");
 
 function helloWorldAsync() {
-	promesa = Promise.reject(new Error({
-		mensaje: "Hola mundo!"
-	}))
-return promesa;
+	return Promise.reject(new Error("Hola mundo!"));
 }
-
 
 module.exports = helloWorldAsync;
