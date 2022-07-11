@@ -9,27 +9,17 @@
 const Promise = require("bluebird");
 const request = require("request-promise");
 
-function buildFight(pokemon1, pokemon2) {
-	const getPokemon = (pokemon) => request.get({
-		url: `https://pokeapi.co/api/v2/pokemon/${pokemon}`,
-		json: true
-		}).promise()
-	//.then(({results}) => results)
-	//.map(pokemon => getPokemon1(pokemon1))
+const getPokemon = (pokemon) => {
+    let options = {
+        url: `https://pokeapi.co/api/v2/pokemon/${pokemon}`,
+        method: "GET",
+        json: true
+    }
+    return request(options);
+}
 
-	return Promise.all([
-	getPokemon(pokemon1),
-	getPokemon(pokemon2)
-	]);
-
-	/*aca estariamos devolviendo un array pero no una promesa
-	por lo tanto, devolveria error. es por ello, que usamos Promise.all*/
-
-	/*var array[
-	getPokemon(pokemon1),
-	getPokemon(pokemon2)
-	];*/
-
+const buildFight = (pokemon1, pokemon2) => {
+    return Promise.all([getPokemon(pokemon1), getPokemon(pokemon2)])
 }
 
 module.exports = buildFight;
